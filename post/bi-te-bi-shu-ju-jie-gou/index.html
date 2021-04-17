@@ -1,92 +1,97 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>比特币数据结构 | 两个朋友指甲</title>
-<meta name="description" content="财源滚滚来">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://xiixiixixi.github.io/favicon.ico?v=1618680197175">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://xiixiixixi.github.io/favicon.ico?v=1618680320918">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://xiixiixixi.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="比特币数据结构 | 两个朋友指甲 - Atom Feed" href="https://xiixiixixi.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <meta name="description" content="哈希指针
 
-
-
+指针
+在程序运行过程中，需要用到数据。最简单的是直接获取数据，但当数据本身较大，需要占用较大空间时，明显会造成一定麻烦。因此，可以引入指针这一概念。当需要获取数据时，只需要按照指针所给的地址，去对应的位置读取数据即可，这样大大节..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://xiixiixixi.github.io">
-        <img class="avatar" src="https://xiixiixixi.github.io/images/avatar.png?v=1618680197175" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://xiixiixixi.github.io">
-        <h1 class="site-title">两个朋友指甲</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://xiixiixixi.github.io">
+  <img class="avatar" src="https://xiixiixixi.github.io/images/avatar.png?v=1618680320918" alt="">
+  </a>
+  <h1 class="site-title">
+    两个朋友指甲
+  </h1>
+  <p class="site-description">
+    财源滚滚来
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
 </div>
 
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="/" class="menu purple-link">
-            首页
-          </a>
-        
-      
-        
-          <a href="/archives" class="menu purple-link">
-            归档
-          </a>
-        
-      
-        
-          <a href="/tags" class="menu purple-link">
-            标签
-          </a>
-        
-      
-        
-          <a href="/post/about" class="menu purple-link">
-            关于
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
         <div class="post-detail">
-          
-          <h2 class="post-title">比特币数据结构</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2021-04-18</span>
+          <article class="post">
+            <h2 class="post-title">
+              比特币数据结构
+            </h2>
+            <div class="post-info">
+              <span>
+                2021-04-18
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
             
-          </div>
-          <div class="post-content">
-            <h1 id="哈希指针">哈希指针</h1>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="哈希指针">哈希指针</h1>
 <ul>
 <li>指针<br>
 在程序运行过程中，需要用到数据。最简单的是直接获取数据，但当数据本身较大，需要占用较大空间时，明显会造成一定麻烦。因此，可以引入<strong>指针</strong>这一概念。当需要获取数据时，只需要按照指针所给的地址，去对应的位置读取数据即可，这样大大节省了内存空间。<br>
@@ -146,57 +151,83 @@ Markle Tree可以用于提供Markle Proof。关于Markle proof，需要先了解
 </blockquote>
 <p>一般来说，一般的链表我们都可以改造为使用哈希指针的链表，但当链表中存在环时，哈希指针便不能再使用。</p>
 
-          </div>
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%93%88%E5%B8%8C%E6%8C%87%E9%92%88">哈希指针</a>
+<ul>
+<li><a href="#markle-tree%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91">Markle Tree(默克尔树)</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://xiixiixixi.github.io/post/bi-te-bi-mi-ma-xue-yuan-li/">
+            <div class="next">下一篇</div>
+            <a href="https://xiixiixixi.github.io/post/bi-te-bi-mi-ma-xue-yuan-li/">
               <h3 class="post-title">
-                下一篇：比特币密码学原理
+                比特币密码学原理
               </h3>
             </a>
           </div>
-          
-      </div>
+        
 
-      
+        
 
-      <div class="site-footer">
-  <div class="slogan">财源滚滚来</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://xiixiixixi.github.io/atom.xml" target="_blank">RSS</a>
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://xiixiixixi.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-
+      </div>
     </div>
-    <script type="application/javascript">
 
-hljs.initHighlightingOnLoad()
+    <script>
+      hljs.initHighlightingOnLoad()
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-</script>
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
 
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
 
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
 
-
+    </script>
   </body>
 </html>
