@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://xiixiixixi.github.io</id>
     <title>两个朋友指甲</title>
-    <updated>2021-04-17T17:25:26.245Z</updated>
+    <updated>2021-04-18T13:46:51.862Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://xiixiixixi.github.io"/>
     <link rel="self" href="https://xiixiixixi.github.io/atom.xml"/>
@@ -10,6 +10,125 @@
     <logo>https://xiixiixixi.github.io/images/avatar.png</logo>
     <icon>https://xiixiixixi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, 两个朋友指甲</rights>
+    <entry>
+        <title type="html"><![CDATA[比特币中的共识协议]]></title>
+        <id>https://xiixiixixi.github.io/post/bi-te-bi-zhong-de-gong-shi-xie-yi/</id>
+        <link href="https://xiixiixixi.github.io/post/bi-te-bi-zhong-de-gong-shi-xie-yi/">
+        </link>
+        <updated>2021-04-18T13:45:33.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="双花攻击">双花攻击</h2>
+<h3 id="1-中心化数字货币">1. 中心化数字货币</h3>
+<p>央行可以发行一种和纸币对应的数字货币，数字货币中包含面额、编号和央行数字签名。如下图所示：</p>
+<figure data-type="image" tabindex="1"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/format,png.png" alt="img" loading="lazy"></figure>
+<p>当Alice向Bob花费100元时，可以将手中的100元数字货币转交给Bob。但是，这种数字货币会有一个严重问题，Alice可以复制这个数字货币，并在下一次支付时候，再次使用。这个就是双花问题double spending。</p>
+<h4 id="中心化数字货币使用过程">中心化数字货币使用过程</h4>
+<p>假设张三有100元数字货币，要支付给李四<br>
+首先张三把这100元支付给李四这个消息和对这个消息的签名发给李四，李四收到后首先用张三的公钥验证这个消息是不是张三发的(因为有签名，张三也无法抵赖)，再根据央行的签名确定这100元是不是央行发行的，如果是，那么再把整个信息发给央行，央行同样验证张三的签名和自己的签名，然后根据编号在数据库里查询这100元是否在张三的账户上，如果是，把这个编号对应的100元记录在李四的账户上，然后把这个记账的信息签名后发给李四和张三。</p>
+<figure data-type="image" tabindex="2"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDA4Mzg5OQ==,size_16,color_FFFFFF,t_70-20210418150044485.png" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>央行在货币上签名：保证货币发行的有效性<br>
+货币编号：防止double-spending<br>
+张三对支付消息签名：确认这笔交易是张三认可的（他人无法伪造和张三无法抵赖）<br>
+李四验证：确认交易的内容、确认张三对交易的认可、确认这张100元是由央行发行的(但李四无法确定这张100元现在是不是张三账上的)<br>
+央行处理交易：确认张三对交易的认可、确认这张100元是由自己发行的、检查这100元是否在张三账上、依据交易内容修改账本(央行需要维护一个总的账本)、将账本的修改信息发送签名后发送给李四和张三，李四确定自己账户上多了这100元，张三确认自己账上少了这100元。</p>
+</blockquote>
+<h4 id="中心化数字货币存在的问题">中心化数字货币存在的问题</h4>
+<p>货币的发行由中心化机构决定，任意一笔交易都要经由中心化机构的确认，中心化账本有被篡改的风险。</p>
+<h3 id="2-去中心化的数字货币">2. 去中心化的数字货币</h3>
+<p>比特币是一种去中心化的货币，解决了2个问题：①谁来发行货币②解决双花问题。</p>
+<p>货币的发行是根据比特币协议产生，由获得记账权的矿工取得的。当矿工挖矿的时候，交易列表中记录一笔“铸币”交易，由矿工获得当前区块的出块奖励。在时间线上，可能与我们的认知顺序不一样，你可能会认为矿工首先获得了记账权，再获得出块奖励，但实际情况是在出块之前，矿工就会将自己获得出块奖励的交易记录打包到区块中，再进行挖矿，当挖矿成功并得到确认之后自然得到出块奖励。</p>
+<p>解决双花的方法是，每一笔交易都要指明花费来源于哪笔交易。下面是比特币系统中交易的例子，A通过挖矿获得10BTC，在下面A将这10BTC转给B 5BTC，转给C 5BTC。</p>
+<figure data-type="image" tabindex="3"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/format,png-20210418151334609.png" alt="img" loading="lazy"></figure>
+<h4 id="比特币中交易">比特币中交易</h4>
+<p>一个典型的比特币交易如下图，连续4个区块，每个区块记录只记录了一笔交易。</p>
+<p>在第一个区块中，A账户通过记账获得10BTC的记账奖励；第二个区块记录，A花掉了10BTC，转给B 5BTC，转给C 5BTC，A的10BTC来源是第一个区块；第三个区块记录B花掉5BTC，转给C 2BTC，转给D 3BTC，来源是第二个区块记录交易；第三个区块记录C转给E 7BTC，来源与第二个区块C获得的5 BTC和第三个区块中C获得的2 BTC。</p>
+<p>以上例子中，每个区块只记录了一笔交易，而真实的比特币系统中会记录多笔（几千）笔交易。</p>
+<figure data-type="image" tabindex="4"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/format,png-20210418151342289.png" alt="img" loading="lazy"></figure>
+<p>假设A给B转账，A首先需要知道B的地址（公钥的hash值的一部分,这样匿名性更好)，然后对这笔交易进行签名。这笔交易信息中需要有A的公钥，指向币来源的哈希指针，B的地址，本次交易的BTC数量。</p>
+<p>这笔交易在比特币网上扩散，矿工节点验证交易的合法性，用A的公钥验证交易的数字签名(确认这笔交易是A是同意的)，同时用A的公钥验证币的来源是A（即前面一笔交易的收款地址是A）。</p>
+<p>为了避免double-spending，在验证币来源的合法性时，需要检查前面的区块中是否有哈希指针指向同一个来源。即每笔交易的输出(收款)，只能单独一次作为下一笔交易的输入(币的来源）。基于这个设计，如果币来源的数量多于本次交易的数量，A需要在收款方中添加自己的收款地址作为找零账。</p>
+<p>每项交易可以有多个输入和多个输出，但必须满足total inputs=total outputs+transaction fee，其中输入可以是多个账户，也就需要多个签名，输出也可以是多个账户，transaction fee是这次交易的交易费，一般很少，给予获得记账权的结点，交易费的好处在于激励矿工打包此次交易。</p>
+<p>在比特币系统中，上面的过程是通过脚本(BitCoin Script)实现的，如果脚本顺利执行完，那么这笔交易就被验证通过。</p>
+<p>几种交易类型：普通交易，整合资金，分散资金</p>
+<p><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/20201130211532947-20210418203229639.png" alt="" loading="lazy"><br>
+<img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/20201130211638502-20210418203259253.png" alt="img" loading="lazy"><br>
+<img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/20201130211648389-20210418203307330.png" alt="img" loading="lazy"></p>
+<h4 id="比特币区块信息">比特币区块信息</h4>
+<table>
+<thead>
+<tr>
+<th>block header(区块宏观信息）</th>
+<th>block body</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>verion(版本协议)</td>
+<td>transaction list(交易列表)</td>
+</tr>
+<tr>
+<td>Hash of previous block header（指向前一个区块指针）</td>
+<td></td>
+</tr>
+<tr>
+<td>Merkle root hash（默克尔树根哈希值）</td>
+<td></td>
+</tr>
+<tr>
+<td>target（挖矿难度目标阈值）</td>
+<td></td>
+</tr>
+<tr>
+<td>nonce（随机数）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>挖矿求解问题：Hash（block header）&lt;=target</li>
+<li>Hash of previous block header只计算区块块头部分的哈希（ Merkle root hash保证了block body内容不被篡改，所以只需要计算block header即可保证整个区块内容不会被篡改）</li>
+<li>区块链系统中，轻节点（只存储区块block header信息）只利用区块链，但并不参与区块链系统维护和构造。</li>
+</ol>
+<h4 id="分布式共识">分布式共识</h4>
+<p>可否各个节点独立完成区块链构建？<br>
+很明显不行，各个节点独立打包交易，形成区块链，必然无法避免区块链内容不一致。从分布式系统角度来说，账本内容需要取得分布式共识，从而保证区块链内容在不同节点上的一致性。</p>
+<p>根据FLP不可能结论，在一个异步系统中，网络时延无上限，即使只有一个成员是有问题的，也不可能达成共识。</p>
+<p>根据CAP Theorem（Consistency一致性、Availability可靠性、Partition tolerance容错性），任何一个分布式系统中，最多只能满足其中两个性质。</p>
+<p>分布式共识中协议Paxos 可以保证Consistency（若达成共识必然一致），但在某些情况下，可能会一直无法达成共识。【在这里附上一个Paxos协议详解：https://my.oschina.net/u/150175/blog/2992187】</p>
+<h4 id="比特币共识机制">比特币共识机制</h4>
+<blockquote>
+<p>背景：假设系统中存在部分节点有恶意，但存在比例较小。大多数节点为“好”的节点，在这种情况下进行共识协议设置。<br>
+直接投票:<br>
+某个节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半数，加入区块链。<br>
+存在的问题1——恶意节点不断打包不合法区块，导致一直无法达成共识，时间全花费在投票上。<br>
+存在的问题2——无强迫投票手段，某些节点不投票（行政不作为）。<br>
+存在的问题3——网络延迟事先未知，投票需要等多久？效率上会产生问题。<br>
+更大的一个问题——membership。如果是联盟链(hyperledger fabric)，合法的用户才能投票。但比特币系统，任何人都可以加入，且创建账户及其简单，只需要本地产生公私钥对即可。只有转账（交易）时候,比特币系统才能知道该账户的存在。这样，黑客可以使用计算机专门生成大量公私钥对，当其产生大量公私钥对超过系统中一半数目，就可以获得支配地位（女巫攻击）。所以，这种简单的投票方案也是不可行的。</p>
+</blockquote>
+<p>在比特币网路中，每个账户都可以发布交易，每个节点独立打包交易，最终对账本内容取得分布式共识（distributed consensus）。</p>
+<p>比特币系统中采用了很巧妙的方案解决这个问题。虽然仍然是投票，但并非简单的根据账户数目，而是依据计算力进行投票。</p>
+<p>在比特币系统中，每个节点都可以自行组装一个候选区块，而后，尝试各种nonce值，这就是挖矿。[H(block header)&lt;=target]，当某个节点找到符合要求的nonce，便获得了记账权，从而可以将区块发布到系统中。其他节点受到区块后，验证区块合法性，如果系统中绝大多数节点验证通过，则接收该区块为最新的区块并加入到区块链中。</p>
+<p><strong>1. 会不会合法区块被拒绝？</strong><br>
+如图所示。发生分叉的情况下，暂时保存分叉情况，但区块链只承认最长合法链，随着时间推移，必然存在某一条链变成最长合法链。这样，也就会导致合法区块被拒绝</p>
+<figure data-type="image" tabindex="5"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/20200215204910394.png" alt="在这里插入图片描述" loading="lazy"></figure>
+<p><strong>2. 分叉攻击</strong><br>
+如图所示，A用户对上面的A转账给B的记录回滚，从而非法获取利益。在两条链上，发现交易都合法。这是一个典型的双花攻击。A给B转账后，用分叉攻击将钱又转回来，覆盖掉原来的记录。<br>
+在比特币系统中，这种情况实际上很难发生。因为大多数矿工认可的是最长的合法链，会沿着上面的链继续挖下去。而A这个攻击者要想回退记录，就必须使得下面的链变得比上面的链还长。理论上来说，攻击者需要达到整个系统中51%的计算力，才能使得这种攻击成功。</p>
+<figure data-type="image" tabindex="6"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/20200215204936788.png" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>此外，区块链正常运行场景下，也可能会发生分叉。当两个节点同时获得记账权时，会有两个等长的合法链。在缺省情况下，节点接收最先听到的区块，该节点会沿着该区块继续延续。但随着时间延续，必然有一个链胜出，由此保证了区块链的一致性。（被扔掉的区块称为“孤儿区块”）</p>
+<p>可见，依赖于算力竞争，有效的防止了“女巫攻击”。</p>
+<p>区块链中，可能出现临时性分叉。如图，两个矿工同时获得记账权，矿工会挑选一条链，继续往下挖，最终会产生一条最长链，其他的矿工都会沿着合法链往下继续挖矿，而分叉的链条被遗弃，没有任何作用。</p>
+<figure data-type="image" tabindex="7"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/format,png-20210418151352679.png" alt="img" loading="lazy"></figure>
+<h4 id="出块奖励">出块奖励</h4>
+<p>在比特币系统中，通过挖矿获得区块记账权的矿工获得比特币奖励。在初始阶段，每个区块获得50 BTC，约定每隔21万个区块，奖励数减半。</p>
+<p>210000∗10 / 365∗24∗60≈4</p>
+<p>每个区块的出块时间约为10分钟，21万个区块约占用4年时间。2009年，BTC初始时出块奖励是50BTC，2013年时变为25BTC，2017年是12.5BTC。离我们最近出块奖励变化时间是2021年，BTC出块奖励降为6.25BTC。2020年2月，比特币的价格约为9766美元，那么出块奖励折合成美元就是12.2万美元。</p>
+<h4 id="交易费">交易费</h4>
+<p>除了出块奖励外，获得记账权的矿工，还可以获得交易费。交易费是指，由支付方在每笔交易中除了应收金额外，多付给矿工的BTC，为了鼓励矿工将交易打包到区块中，那么交易就可以尽早确认。交易费不是必须的，交易中也可以不包含交易费。</p>
+<p>当前，比特币系统中，平均有10万条交易等待打包确认，而每个区块有1M大小限制，而矿工更愿意将包含交易费的区块。如下图的交易，COINBASE交易就是矿工的铸币交易，矿工获得的奖励除了12.622 BTC，当前的出块奖励是12.5 BTC，额外的0.122就是这个区块打包全部交易的交易费。</p>
+<figure data-type="image" tabindex="8"><img src="https://gitee.com/xiixiixixi/picgo/raw/master/img/format,png-20210418151405782-20210418151434504.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[比特币数据结构]]></title>
         <id>https://xiixiixixi.github.io/post/bi-te-bi-shu-ju-jie-gou/</id>
